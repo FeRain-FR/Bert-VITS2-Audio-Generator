@@ -5,7 +5,7 @@ Bert-VITS2 (https://github.com/fishaudio/Bert-VITS2)
 
 PyQt-Fluent-Widgets (https://github.com/zhiyiYo/PyQt-Fluent-Widgets).
 
-![app](https://github.com/FeRain-FR/Bert-VITS2-Audio-Generator/assets/151917667/4c33f7ae-17d7-4d41-94d0-317aefde67a6)
+![app](https://github.com/FeRain-FR/Bert-VITS2-Audio-Generator/assets/151917667/5c4c48ca-8691-413e-98c6-058d312409e0)
 
 ## Install
 - **Bert-VITS2-Audio-Generator.zip**
@@ -27,7 +27,7 @@ PyQt-Fluent-Widgets (https://github.com/zhiyiYo/PyQt-Fluent-Widgets).
 
 Large model files:
 
-![largefiles](https://github.com/FeRain-FR/Bert-VITS2-Audio-Generator/assets/151917667/0e24c2e2-416c-420b-ad47-4fe354c4c288)
+![largefiles](https://github.com/FeRain-FR/Bert-VITS2-Audio-Generator/assets/151917667/7004b9f4-e7a3-4af5-90dd-7caeac645ea0)
 
 bert/chinese-roberta-wwm-ext-large/pytorch_model.bin: [Download Link](https://huggingface.co/hfl/chinese-roberta-wwm-ext-large/resolve/main/pytorch_model.bin?download=true)
 
@@ -53,7 +53,7 @@ bert/deberta-v3-large/pytorch_model.bin: [Download Link](https://huggingface.co/
 
 The location of bert:
 
-![bert](https://github.com/FeRain-FR/Bert-VITS2-Audio-Generator/assets/151917667/4d3061b8-8cf7-4696-887a-93675c3a17f3)
+![bert](https://github.com/FeRain-FR/Bert-VITS2-Audio-Generator/assets/151917667/8c2c9eb9-9ae1-4b6b-a389-70555a8425ae)
 #
 - **Source Code**
 
