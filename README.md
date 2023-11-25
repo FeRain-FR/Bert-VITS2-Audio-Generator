@@ -3,7 +3,7 @@ GUI TTS application based on:
 
 Bert-VITS2 (https://github.com/fishaudio/Bert-VITS2)
 
-PyQt-Fluent-Widgets (https://github.com/zhiyiYo/PyQt-Fluent-Widgets).
+PyQt-Fluent-Widgets (https://github.com/zhiyiYo/PyQt-Fluent-Widgets)
 
 ![app](https://github.com/FeRain-FR/Bert-VITS2-Audio-Generator/assets/151917667/5c4c48ca-8691-413e-98c6-058d312409e0)
 
@@ -12,15 +12,15 @@ PyQt-Fluent-Widgets (https://github.com/zhiyiYo/PyQt-Fluent-Widgets).
 
   [Download Here](https://drive.google.com/file/d/1Xk2m4nVYMdHGU2ZSQDQT2kmefFMdUEex/view?usp=drive_link) (Google Drive)
   
-  [Download Here](https://pan.baidu.com/s/1-GDDPjYQ_mBnv-VrFvHKmQ?pwd=dx37) (百度網盤)
+  [Download Here](https://pan.baidu.com/s/1-GDDPjYQ_mBnv-VrFvHKmQ?pwd=dx37) (百度網盤/提取碼︰dx37)
 
-> Suitable for who knows nothing about the deployment of Bert-VITS2.
+> Suitable for who knows nothing about the deployment of Bert-VITS2
 > 
 > Download, Extract, Run app.exe
 
-> 適合對Bert-VITS2部署一無所知的朋友。
+> 適合對Bert-VITS2部署一無所知的朋友
 >
-> 下載，解壓，運行 app.exe
+> 下載，解壓，運行app.exe
 #
 
 - **Bert-VITS2-Audio-Generator_withoutLargeModelFiles.zip**
@@ -39,13 +39,13 @@ bert/deberta-v3-large/pytorch_model.bin: [Download Link](https://huggingface.co/
 
 </br>
 
-> Suitable for who has already deployed Bert-VITS2 locally.
+> Suitable for who has already deployed Bert-VITS2 locally
 >
 > Move the pytorch_model.bin files to correct places, then Run app.exe
 > 
 > **(Note that NOT to rename the .bin files and DO NOT mix them up)**
 
-> 適合已經本地部署Bert-VITS2的朋友。
+> 適合已經本地部署Bert-VITS2的朋友
 >
 > 將以上幾個pytorch_model.bin文件放到正確的位置，然後運行app.exe
 > 
@@ -77,7 +77,7 @@ The location of bert:
 >
 >已提供requirements.txt
 >
->運行 app.py
+>運行app.py
 #
 
 
