@@ -11,6 +11,8 @@ PyQt-Fluent-Widgets (https://github.com/zhiyiYo/PyQt-Fluent-Widgets).
 - **Bert-VITS2-Audio-Generator.zip**
 
   [Download Here](https://drive.google.com/file/d/1Xk2m4nVYMdHGU2ZSQDQT2kmefFMdUEex/view?usp=drive_link) (Google Drive)
+  
+  [Download Here](https://pan.baidu.com/s/1-GDDPjYQ_mBnv-VrFvHKmQ?pwd=dx37) (百度網盤)
 
 > Suitable for who knows nothing about the deployment of Bert-VITS2.
 > 
