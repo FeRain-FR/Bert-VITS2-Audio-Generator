@@ -7,6 +7,15 @@ PyQt-Fluent-Widgets (https://github.com/zhiyiYo/PyQt-Fluent-Widgets)
 
 ![app](https://github.com/FeRain-FR/Bert-VITS2-Audio-Generator/assets/151917667/5c4c48ca-8691-413e-98c6-058d312409e0)
 
+## Update
+- Version 1.1 is released
+
+  Download [app_v11.exe](https://github.com/FeRain-FR/Bert-VITS2-Audio-Generator/releases/download/v1.1/app_v11.exe)
+  
+  Replace the original app.exe by app_v11.exe
+
+  以app_v11.exe取代原有的app.exe
+
 ## Install
 - **Bert-VITS2-Audio-Generator.zip**
 
