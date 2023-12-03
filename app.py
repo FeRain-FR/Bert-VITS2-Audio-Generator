@@ -331,6 +331,14 @@ if __name__ == "__main__":
                 except IndexError:
                     self.Box.reject()
                     self.Message = "IndexError: Please check the value of n_speakers"
+
+                except KeyError:
+                    self.Box.reject()
+                    self.Message = "KeyError: Language (" + self.ComboBox_2.currentText() + ") not supported"
+                
+                except OSError:
+                    self.Box.reject()
+                    self.Message = "OSError: Language (" + self.ComboBox_2.currentText() + ") not supported"
                     
         def generate(self):
             if self.ComboBox_3.currentIndex() == -1:
