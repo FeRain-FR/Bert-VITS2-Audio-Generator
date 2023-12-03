@@ -1,4 +1,5 @@
 import sys, os
+import re
 import shutil
 import zhconv
 import json
@@ -15,6 +16,7 @@ from qfluentwidgets import PushButton, ComboBox, CaptionLabel, IndeterminateProg
 from qfluentwidgets.multimedia import SimpleMediaPlayBar, MediaPlayBarButton
 from qfluentwidgets.common.icon import FluentIcon
 from qfluentwidgets.components.dialog_box.mask_dialog_base import MaskDialogBase
+from qfluentwidgets.components.widgets.combo_box import ComboBoxBase
 from qfluentwidgets.common.style_sheet import FluentStyleSheet
 
 import utils
@@ -22,6 +24,8 @@ import torch
 from infer import infer, get_net_g
 import numpy as np
 from gradio.processing_utils import convert_to_16_bit_wav
+
+regex = r'([\u0041-\u005a\u0061-\u007a ]+)'
 
 if __name__ == "__main__":
     hps = utils.get_hparams_from_file("./configs/config.json")
@@ -36,7 +40,33 @@ if __name__ == "__main__":
     
     versions = ["1.0", "1.1.0", "1.1.1-fix", "2.0"]
     languages = ["ZH", "JP", "EN"]
-    speakers = ["Speaker1", "Speaker2", "Speaker3"]
+    speakers = list(hps.data.spk2id.keys())
+    
+    class NewComboBox(ComboBox):
+        def __init__(self, parent):
+            super().__init__(parent)
+            
+        def _onItemClicked(self, index):
+            self.setCurrentIndex(index)
+            self.currentTextChanged.emit(self.currentText())
+            self.currentIndexChanged.emit(index)
+            
+        def removeItem(self, index: int):
+            if not 0 <= index < len(self.items):
+                return
+
+            self.items.pop(index)
+
+            if index < self.currentIndex():
+                self.setCurrentIndex(self._currentIndex - 1)
+            elif index == self.currentIndex():
+                if index > 0:
+                    self.setCurrentIndex(self._currentIndex - 1)
+                else:
+                    self.setCurrentIndex(0)
+
+            if self.count() == 0:
+                self.clear()
     
     class GenerateMessageBox(MaskDialogBase):
 
@@ -207,8 +237,8 @@ if __name__ == "__main__":
             self.layout_2 = QHBoxLayout(self.widgetBox_2)
             self.layout_2.setContentsMargins(0,0,0,0)
             self.layout_2.setSpacing(4)
-            self.ComboBox_5 = ComboBox(self.widgetBox_2)
-            self.ComboBox_5.setMinimumWidth(96)
+            self.ComboBox_5 = NewComboBox(self.widgetBox_2)
+            self.ComboBox_5.setFixedWidth(96)
             self.ComboBox_5.setMaximumWidth(128)
             self.ComboBox_5.addItems(data['presets'].keys())
             self.ComboBox_5.currentIndexChanged.connect(self.change_current_presets)
@@ -268,30 +298,40 @@ if __name__ == "__main__":
                 model_path=models[self.ComboBox_3.currentIndex()], version=self.ComboBox_4.currentText(), device=device, hps=hps
             )
             text = self.PlainTextEdit.toPlainText()
+            audio_list = []
             if self.ComboBox_2.currentText() == 'ZH':
                 text = zhconv.convert(text, 'zh-cn')
-            audio_list = []
-            with torch.no_grad():
-                audio = infer(
-                        text,
-                        self.DoubleSpinBox_1.value(),
-                        self.DoubleSpinBox_2.value(),
-                        self.DoubleSpinBox_3.value(),
-                        self.DoubleSpinBox_4.value(),
-                        self.ComboBox_1.currentText(), #Speaker
-                        self.ComboBox_2.currentText(), #Language
-                        hps,
-                        net_g,
-                        device,
-                        self.ComboBox_4.currentText(), #Version
-                    )
-                audio_list.append(convert_to_16_bit_wav(audio))
-                write("output.wav", 44100, np.concatenate(audio_list).astype(np.int16))
-                self.url = QUrl.fromLocalFile(str(Path('output.wav').absolute()))
-                self.simplePlayBar.player.setSource(self.url)
-                print("Success")
-                self.Box.accept() #Close the dialog
-            
+
+            with torch.no_grad():             
+                try:
+                    audio = infer(
+                            text,
+                            self.DoubleSpinBox_1.value(),
+                            self.DoubleSpinBox_2.value(),
+                            self.DoubleSpinBox_3.value(),
+                            self.DoubleSpinBox_4.value(),
+                            self.ComboBox_1.currentText(), #Speaker
+                            self.ComboBox_2.currentText(), #Language
+                            hps,
+                            net_g,
+                            device,
+                            self.ComboBox_4.currentText(), #Version
+                        )
+                    audio_list.append(convert_to_16_bit_wav(audio))
+                    write("output.wav", 44100, np.concatenate(audio_list).astype(np.int16))
+                    self.url = QUrl.fromLocalFile(str(Path('output.wav').absolute()))
+                    self.simplePlayBar.player.setSource(self.url)
+                    print("Success")
+                    self.Box.accept() #Close the dialog
+                        
+                except RuntimeError:
+                    self.Box.reject()
+                    self.Message = "RuntimeError: Your text input is too long"
+                    
+                except IndexError:
+                    self.Box.reject()
+                    self.Message = "IndexError: Please check the value of n_speakers"
+                    
         def generate(self):
             if self.ComboBox_3.currentIndex() == -1:
                 InfoBar.error(
@@ -300,7 +340,7 @@ if __name__ == "__main__":
                     orient=Qt.Horizontal,
                     isClosable=True,
                     position=InfoBarPosition.TOP,
-                    duration=3000,
+                    duration=5000,
                     parent=self
                 )         
                 print("No Model")
@@ -313,7 +353,7 @@ if __name__ == "__main__":
                     orient=Qt.Horizontal,
                     isClosable=True,
                     position=InfoBarPosition.TOP,
-                    duration=3000,
+                    duration=5000,
                     parent=self
                 )
                 print("File Not Exist")
@@ -333,6 +373,16 @@ if __name__ == "__main__":
                     isClosable=True,
                     position=InfoBarPosition.TOP,
                     duration=3000,
+                    parent=self
+                )
+            else:
+                InfoBar.error(
+                    title='Failure',
+                    content=self.Message,
+                    orient=Qt.Horizontal,
+                    isClosable=True,
+                    position=InfoBarPosition.TOP,
+                    duration=10000,
                     parent=self
                 )
 
