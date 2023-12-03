@@ -15,6 +15,12 @@ PyQt-Fluent-Widgets (https://github.com/zhiyiYo/PyQt-Fluent-Widgets)
   Replace the original app.exe by app_v11.exe
 
   以app_v11.exe取代原有的app.exe
+  
+> If multi-speaker model is used, please configure n_speaker and spk2id in configs/config.json
+> 
+> 如果使用多人模型，請先到configs/config.json修改n_speaker和spk2id
+> 
+> ![config](https://github.com/FeRain-FR/Bert-VITS2-Audio-Generator/assets/151917667/07a31a04-acc1-493f-a50b-edad6cfefd3c)
 
 ## Install
 - **Bert-VITS2-Audio-Generator.zip**
