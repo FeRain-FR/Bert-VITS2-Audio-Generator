@@ -74,9 +74,9 @@ The location of bert:
 #
 - **Source Code**
 
-  [Download as zip](https://github.com/FeRain-FR/Bert-VITS2-Audio-Generator/archive/refs/tags/v1.0.zip)
+  [Download as zip](https://github.com/FeRain-FR/Bert-VITS2-Audio-Generator/archive/refs/tags/v1.1.zip)
   
-  [Download as tar.gz](https://github.com/FeRain-FR/Bert-VITS2-Audio-Generator/archive/refs/tags/v1.0.tar.gz)
+  [Download as tar.gz](https://github.com/FeRain-FR/Bert-VITS2-Audio-Generator/archive/refs/tags/v1.1.tar.gz)
 
 >Suitable for who is familiar with Python
 >
